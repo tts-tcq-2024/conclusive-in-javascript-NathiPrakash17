@@ -18,7 +18,7 @@ describe('checkAndAlert Function Tests', () => {
   it('should call sendToController for TOO_HIGH breach', () => {
     alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 44);
     expect(sendToControllerStub.calledOnce).to.be.true;
-    expect(sendToControllerStub.calledWith('NORMAL')).to.be.true;
+    expect(sendToControllerStub.calledWith('TOO_HIGH')).to.be.true; // Fixed expectation
   });
 
   it('should call sendToEmail for TOO_LOW breach', () => {
