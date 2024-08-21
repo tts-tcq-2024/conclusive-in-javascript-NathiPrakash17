@@ -3,11 +3,9 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 
 describe('checkAndAlert Function Tests', () => {
-  let sendToControllerStub;
   let sendToEmailStub;
 
   beforeEach(() => {
-    sendToControllerStub = sinon.stub(alerts, 'sendToController');
     sendToEmailStub = sinon.stub(alerts, 'sendToEmail');
   });
 
