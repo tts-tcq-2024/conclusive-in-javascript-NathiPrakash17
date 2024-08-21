@@ -1,4 +1,4 @@
-const alerts = require('../src/typewisealert');
+const alerts = require('../src/temperatureBreachChecker');
 const { expect } = require('chai');
 const sinon = require('sinon');
 
