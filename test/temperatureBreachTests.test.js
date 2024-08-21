@@ -16,17 +16,13 @@ describe('checkAndAlert Function Tests', () => {
   });
 
     it('should call sendToController for TOO_HIGH breach', () => {
-    alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 44);
-    console.log(sendToControllerStub.calledOnce); 
-    console.log(sendToControllerStub.args);      
+    alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 41 );  
     expect(sendToControllerStub.calledOnce).to.be.true;
     expect(sendToControllerStub.calledWith('TOO_HIGH')).to.be.true;
   });
 
   it('should call sendToEmail for TOO_LOW breach', () => {
-    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'PASSIVE_COOLING' }, -10);
-    console.log(sendToEmailStub.calledOnce); 
-    console.log(sendToEmailStub.args);      
+    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'PASSIVE_COOLING' }, -1);     
     expect(sendToEmailStub.calledOnce).to.be.true;
     expect(sendToEmailStub.calledWith('TOO_LOW')).to.be.true;
   });
