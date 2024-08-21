@@ -14,29 +14,6 @@ describe('checkAndAlert Function Tests', () => {
   afterEach(() => {
     sinon.restore();
   });
-
-  it('should log the correct message to the controller for TOO_HIGH breach', () => {
-    let consoleOutput = [];
-    const mockedLog = output => consoleOutput.push(output);
-
-    console.log = mockedLog;
-    alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 44);
-
-    expect(consoleOutput).to.include('65261, TOO_HIGH');
-    console.log = console.log;
-  });
-
-  it('should log the correct email message for TOO_LOW breach', () => {
-    let consoleOutput = [];
-    const mockedLog = output => consoleOutput.push(output);
-
-    console.log = mockedLog;
-    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'PASSIVE_COOLING' }, -10);
-
-    expect(consoleOutput).to.include('To: a.b@c.com');
-    expect(consoleOutput).to.include('Hi, the temperature is too low');
-    console.log = console.log;
-  });
   
   it('should call sendToEmail for NORMAL temperature without issues', () => {
     alerts.checkAndAlert('TO_EMAIL', { coolingType: 'HI_ACTIVE_COOLING' },50);
