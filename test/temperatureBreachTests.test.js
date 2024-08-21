@@ -16,19 +16,19 @@ describe('checkAndAlert Function Tests', () => {
   });
 
   it('should call sendToController for TOO_HIGH breach', () => {
-    alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 45);
+    alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 44);
     expect(sendToControllerStub.calledOnce).to.be.true;
     expect(sendToControllerStub.calledWith('NORMAL')).to.be.true;
   });
 
   it('should call sendToEmail for TOO_LOW breach', () => {
-    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'PASSIVE_COOLING' }, -210);
+    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'PASSIVE_COOLING' }, -10);
     expect(sendToEmailStub.calledOnce).to.be.true;
     expect(sendToEmailStub.calledWith('TOO_LOW')).to.be.true;
   });
 
   it('should call sendToEmail for NORMAL temperature without issues', () => {
-    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'HI_ACTIVE_COOLING' }, 430);
+    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'HI_ACTIVE_COOLING' },50);
     expect(sendToEmailStub.notCalled).to.be.true; 
   });
 
