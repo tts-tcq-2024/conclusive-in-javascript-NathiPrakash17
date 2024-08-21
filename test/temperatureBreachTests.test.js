@@ -15,18 +15,29 @@ describe('checkAndAlert Function Tests', () => {
     sinon.restore();
   });
 
-    it('should call sendToController for TOO_HIGH breach', () => {
-    alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 41 );  
-    expect(sendToControllerStub.calledOnce).to.be.true;
-    expect(sendToControllerStub.calledWith('TOO_HIGH')).to.be.true;
+  it('should log the correct message to the controller for TOO_HIGH breach', () => {
+    let consoleOutput = [];
+    const mockedLog = output => consoleOutput.push(output);
+
+    console.log = mockedLog;
+    alerts.checkAndAlert('TO_CONTROLLER', { coolingType: 'MED_ACTIVE_COOLING' }, 44);
+
+    expect(consoleOutput).to.include('65261, TOO_HIGH');
+    console.log = console.log;
   });
 
-  it('should call sendToEmail for TOO_LOW breach', () => {
-    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'PASSIVE_COOLING' }, -1);     
-    expect(sendToEmailStub.calledOnce).to.be.true;
-    expect(sendToEmailStub.calledWith('TOO_LOW')).to.be.true;
-  });
+  it('should log the correct email message for TOO_LOW breach', () => {
+    let consoleOutput = [];
+    const mockedLog = output => consoleOutput.push(output);
 
+    console.log = mockedLog;
+    alerts.checkAndAlert('TO_EMAIL', { coolingType: 'PASSIVE_COOLING' }, -10);
+
+    expect(consoleOutput).to.include('To: a.b@c.com');
+    expect(consoleOutput).to.include('Hi, the temperature is too low');
+    console.log = console.log;
+  });
+  
   it('should call sendToEmail for NORMAL temperature without issues', () => {
     alerts.checkAndAlert('TO_EMAIL', { coolingType: 'HI_ACTIVE_COOLING' },50);
     expect(sendToEmailStub.notCalled).to.be.true; 
