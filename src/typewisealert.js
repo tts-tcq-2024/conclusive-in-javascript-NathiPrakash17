@@ -37,7 +37,7 @@ function sendAlert(alertTarget, breachType) {
       sendToEmail(breachType);
       break;
     default:
-      console.error('Unknown alert target');
+      console.log('Unknown alert target');
   }
 }
 
